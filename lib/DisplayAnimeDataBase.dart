@@ -60,6 +60,7 @@ class _DisplayAnimeDataBaseState extends State<DisplayAnimeDataBase> {
                         duration: Duration(seconds: 1), curve: Curves.linear);
                     genre = value!;
                   });
+
                 }),
             DropdownButton(
                 icon: Icon(Icons.sort),
