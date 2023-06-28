@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http_practice/AnimeWallpapers.dart';
+import 'package:http_practice/AnimeWallpapers2.dart';
+import 'package:http_practice/DisplayAnimeDataBase.dart';
+import 'package:http_practice/FakestoreapiUsers.dart';
 import 'package:http_practice/jsonplaceholder.typicode.com/AlbumsApiData.dart';
 import 'package:http_practice/jsonplaceholder.typicode.com/CommentsApiData.dart';
 import 'package:http_practice/jsonplaceholder.typicode.com/PhotosApiData.dart';
@@ -76,6 +80,35 @@ class HomeScreen extends StatelessWidget {
           title: Text("Unsplash Wallpapers"),
           subtitle: Text("https://api.unsplash.com/search/photos?query=dogs"),
         ),
+        Divider(),
+        ListTile(
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => FakestoreapiUsersDisplayData())),
+          title: Text("Fake Store API Users"),
+          subtitle: Text("https://fakestoreapi.com/users"),
+        ),
+        Divider(),
+        ListTile(
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => RandomAnimeWallpapers())),
+          title: Text("Random Anime Wallpapers"),
+          subtitle: Text("https://harrynull.tech/api/wallpapers/random_anime_wallpaper"),
+        ),
+        Divider(),
+        ListTile(
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => RandomAnimeWallpapers2())),
+          title: Text("Random Anime Wallpapers 2"),
+          subtitle: Text("https://random-anime-img.p.rapidapi.com/anime"),
+        ),
+        Divider(),
+        ListTile(
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => DisplayAnimeDataBase())),
+          title: Text("Anime Database"),
+          subtitle: Text("https://anime-db.p.rapidapi.com/anime"),
+        ),
+
       ]),
     );
   }

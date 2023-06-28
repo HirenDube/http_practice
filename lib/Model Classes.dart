@@ -24,12 +24,11 @@ class Photos {
   final int albumId, id;
   final String title, url, thumbnailUrl;
 
-  Photos(
-      {required this.albumId,
-      required this.id,
-      required this.title,
-      required this.url,
-      required this.thumbnailUrl});
+  Photos({required this.albumId,
+    required this.id,
+    required this.title,
+    required this.url,
+    required this.thumbnailUrl});
 
   factory Photos.fromJsonData({required Map<dynamic, dynamic> jsonData}) {
     return Photos(
@@ -46,15 +45,14 @@ class Products {
   final double price, rating;
   final String title, description, category, image;
 
-  Products(
-      {required this.id,
-      required this.title,
-      required this.image,
-      required this.price,
-      required this.category,
-      required this.description,
-      required this.rating,
-      required this.ratingCount});
+  Products({required this.id,
+    required this.title,
+    required this.image,
+    required this.price,
+    required this.category,
+    required this.description,
+    required this.rating,
+    required this.ratingCount});
 
   factory Products.fromJsonData({required Map jsonData}) {
     // var temp =  Products(
@@ -66,7 +64,6 @@ class Products {
     //     description: jsonData['descripstion'] as String ?? "",
     //     rating: jsonData['rating']['rate'] as double ?? 0,
     //     ratingCount: jsonData['ratingCount']['count'] as int ?? 0);
-
     Map ratings = jsonData['rating'];
     var temp = Products(
         id: int.parse("${jsonData["id"]}") ?? 0,
@@ -86,11 +83,10 @@ class Posts {
   final int id, userId;
   final String title, body;
 
-  Posts(
-      {required this.title,
-      required this.body,
-      required this.id,
-      required this.userId});
+  Posts({required this.title,
+    required this.body,
+    required this.id,
+    required this.userId});
 
   factory Posts.fromJsonData({required Map jsonData}) {
     return Posts(
@@ -119,12 +115,11 @@ class Comments {
   final int id, postId;
   final String name, email, body;
 
-  Comments(
-      {required this.name,
-      required this.email,
-      required this.body,
-      required this.id,
-      required this.postId});
+  Comments({required this.name,
+    required this.email,
+    required this.body,
+    required this.id,
+    required this.postId});
 
   factory Comments.fromJsonData({required Map jsonData}) {
     return Comments(
@@ -200,11 +195,10 @@ class UnsplashWallpapers {
   final String download;
   final String thumb;
 
-  UnsplashWallpapers(
-      {required this.thumb,
-      required this.full,
-      required this.small,
-      required this.download});
+  UnsplashWallpapers({required this.thumb,
+    required this.full,
+    required this.small,
+    required this.download});
 
   factory UnsplashWallpapers.fromJsonData({required Map jsonData}) {
     Map urls = jsonData['urls'];
@@ -214,5 +208,88 @@ class UnsplashWallpapers {
         small: urls['small'] as String,
         download: links['download'] as String,
         thumb: urls['thumb'] as String);
+  }
+}
+
+class FakestoreapiUsers {
+  final String email,
+      username,
+      password,
+      phone,
+      firstname,
+      lastname,
+      city,
+      street,
+      zipcode,
+      lat,
+      long;
+  final int houseNumber, id, v;
+
+  FakestoreapiUsers({
+    required this.v,
+    required this.email,
+    required this.username,
+    required this.password,
+    required this.phone,
+    required this.firstname,
+    required this.lastname,
+    required this.city,
+    required this.street,
+    required this.zipcode,
+    required this.lat,
+    required this.long,
+    required this.houseNumber,
+    required this.id,
+  });
+
+  factory FakestoreapiUsers.fromJsonData({required Map jsonData}) {
+    Map address = jsonData['address'];
+    Map geoLoaction = address['geolocation'];
+    Map name = jsonData['name'];
+    return FakestoreapiUsers(
+        email: jsonData['email'],
+        username: jsonData['username'],
+        password: jsonData['password'],
+        phone: jsonData['phone'],
+        firstname: name['firstname'],
+        lastname: name['lastname'],
+        city: address['city'],
+        street: address['street'],
+        zipcode: address['zipcode'],
+        lat: geoLoaction['lat'],
+        long: geoLoaction['long'],
+        houseNumber: address['number'],
+        id: jsonData['id'],
+        v: jsonData['__v']);
+  }
+}
+
+class AnimeDatabase {
+  final String title, image, malLink, decription, id, type;
+  final List alternativeTitles, genres;
+  final int ranking, noOfEpisode;
+
+  AnimeDatabase({required this.type, required this.id,
+    required this.title,
+    required this.image,
+    required this.malLink,
+    required this.decription,
+    required this.alternativeTitles,
+    required this.genres,
+    required this.ranking,
+    required this.noOfEpisode});
+
+  factory AnimeDatabase.fromJsonData({required Map jsonData}) {
+    return AnimeDatabase(
+        id: jsonData['_id'],
+        title: jsonData['title'],
+        image: jsonData['image'],
+        malLink: jsonData['link'],
+        decription: jsonData['synopsis'],
+        alternativeTitles: jsonData['alternativeTitles'],
+        genres: jsonData['genres'],
+        ranking: jsonData['ranking'],
+        noOfEpisode: jsonData['episodes'],
+        type: jsonData['type']);
   }
 }

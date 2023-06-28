@@ -192,8 +192,8 @@ class _UnsplashWallpaperGetterState extends State<UnsplashWallpaperGetter> {
                                                                 //     name: DateTime.now()
                                                                 //             .microsecondsSinceEpoch
                                                                 //             .toString() +
-                                                                        ".jpg");
-                                                              // },
+                                                                //         ".jpg");
+                                                              },
                                                               child: const Text(
                                                                 "Download",
                                                                 style: TextStyle(
