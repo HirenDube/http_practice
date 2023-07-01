@@ -1,10 +1,22 @@
+import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:http_practice/HomeScreen.dart';
 
-import 'HomeScreen.dart';
+FlutterLocalNotificationsPlugin flanp = FlutterLocalNotificationsPlugin();
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+
+  AndroidInitializationSettings initialiseAndroid =
+      AndroidInitializationSettings("@mipmap/ic_launcher");
+  DarwinInitializationSettings initialiseIOS =
+      DarwinInitializationSettings(defaultPresentAlert: true);
+  InitializationSettings initializationSettings =
+      InitializationSettings(android: initialiseAndroid, iOS: initialiseIOS);
+  bool? didInitialised = await flanp.initialize(initializationSettings);
+  // log("didInitialised : $didInitialised");
 }
 
 class MyApp extends StatelessWidget {
@@ -15,11 +27,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        pageTransitionsTheme: PageTransitionsTheme(
-          builders: {
-            TargetPlatform.android : CupertinoPageTransitionsBuilder()
-          }
-        ),
+        pageTransitionsTheme: PageTransitionsTheme(builders: {
+          TargetPlatform.android: CupertinoPageTransitionsBuilder()
+        }),
         appBarTheme: AppBarTheme(backgroundColor: CupertinoColors.systemYellow),
         useMaterial3: true,
       ),

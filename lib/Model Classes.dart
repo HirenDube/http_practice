@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ToDos {
   final int userId;
   final int id;
@@ -24,11 +26,12 @@ class Photos {
   final int albumId, id;
   final String title, url, thumbnailUrl;
 
-  Photos({required this.albumId,
-    required this.id,
-    required this.title,
-    required this.url,
-    required this.thumbnailUrl});
+  Photos(
+      {required this.albumId,
+      required this.id,
+      required this.title,
+      required this.url,
+      required this.thumbnailUrl});
 
   factory Photos.fromJsonData({required Map<dynamic, dynamic> jsonData}) {
     return Photos(
@@ -40,53 +43,15 @@ class Photos {
   }
 }
 
-class Products {
-  final int id, ratingCount;
-  final double price, rating;
-  final String title, description, category, image;
-
-  Products({required this.id,
-    required this.title,
-    required this.image,
-    required this.price,
-    required this.category,
-    required this.description,
-    required this.rating,
-    required this.ratingCount});
-
-  factory Products.fromJsonData({required Map jsonData}) {
-    // var temp =  Products(
-    //     id: jsonData["id"] as int ?? 0,
-    //     title: jsonData["title"] as String ?? "",
-    //     image: jsonData['image'] as String ?? "",
-    //     price: jsonData['price'] as double ?? 0,
-    //     category: jsonData['category'] as String ?? "",
-    //     description: jsonData['descripstion'] as String ?? "",
-    //     rating: jsonData['rating']['rate'] as double ?? 0,
-    //     ratingCount: jsonData['ratingCount']['count'] as int ?? 0);
-    Map ratings = jsonData['rating'];
-    var temp = Products(
-        id: int.parse("${jsonData["id"]}") ?? 0,
-        title: jsonData["title"] ?? "No data to show",
-        image: jsonData['image'] ?? "No data to show",
-        price: double.parse("${jsonData['price']}") ?? 0,
-        category: jsonData['category'] ?? "No data to show",
-        description: jsonData['description'] ?? "No data to show",
-        rating: double.parse("${ratings['rate']}") ?? 0.0,
-        ratingCount: int.parse("${ratings['count']}") ?? 0);
-
-    return temp;
-  }
-}
-
 class Posts {
   final int id, userId;
   final String title, body;
 
-  Posts({required this.title,
-    required this.body,
-    required this.id,
-    required this.userId});
+  Posts(
+      {required this.title,
+      required this.body,
+      required this.id,
+      required this.userId});
 
   factory Posts.fromJsonData({required Map jsonData}) {
     return Posts(
@@ -115,11 +80,12 @@ class Comments {
   final int id, postId;
   final String name, email, body;
 
-  Comments({required this.name,
-    required this.email,
-    required this.body,
-    required this.id,
-    required this.postId});
+  Comments(
+      {required this.name,
+      required this.email,
+      required this.body,
+      required this.id,
+      required this.postId});
 
   factory Comments.fromJsonData({required Map jsonData}) {
     return Comments(
@@ -195,10 +161,11 @@ class UnsplashWallpapers {
   final String download;
   final String thumb;
 
-  UnsplashWallpapers({required this.thumb,
-    required this.full,
-    required this.small,
-    required this.download});
+  UnsplashWallpapers(
+      {required this.thumb,
+      required this.full,
+      required this.small,
+      required this.download});
 
   factory UnsplashWallpapers.fromJsonData({required Map jsonData}) {
     Map urls = jsonData['urls'];
@@ -211,7 +178,85 @@ class UnsplashWallpapers {
   }
 }
 
+class Products {
+  final int id, ratingCount;
+  final double price, rating;
+  final String title, description, category, image;
+
+  static Products productsFromJson(String jsonData) =>
+      Products.fromJsonData(jsonData: jsonDecode(jsonData));
+
+  static Map productstoJson({required Products object}) {
+    Map a = {
+      "ratingCount": object.ratingCount,
+      "price": object.price,
+      "rating": object.rating,
+      "title": object.title,
+      "description": object.description,
+      "category": object.category,
+      "image": object.image
+    };
+    return a;
+  }
+
+  Products(
+      {required this.id,
+      required this.title,
+      required this.image,
+      required this.price,
+      required this.category,
+      required this.description,
+      required this.rating,
+      required this.ratingCount});
+
+  factory Products.fromJsonData({required Map jsonData}) {
+    // var temp =  Products(
+    //     id: jsonData["id"] as int ?? 0,
+    //     title: jsonData["title"] as String ?? "",
+    //     image: jsonData['image'] as String ?? "",
+    //     price: jsonData['price'] as double ?? 0,
+    //     category: jsonData['category'] as String ?? "",
+    //     description: jsonData['descripstion'] as String ?? "",
+    //     rating: jsonData['rating']['rate'] as double ?? 0,
+    //     ratingCount: jsonData['ratingCount']['count'] as int ?? 0);
+    Map ratings = jsonData['rating'];
+    var temp = Products(
+        id: jsonData["id"] ?? 0,
+        title: jsonData["title"] ?? "No data to show",
+        image: jsonData['image'] ?? "No data to show",
+        price: double.parse("${jsonData['price']}") ?? 0,
+        category: jsonData['category'] ?? "No data to show",
+        description: jsonData['description'] ?? "No data to show",
+        rating: double.parse("${ratings['rate']}") ?? 0.0,
+        ratingCount: ratings['count'] ?? 0);
+
+    return temp;
+  }
+}
+
 class FakestoreapiUsers {
+  static FakestoreapiUsers fakeStoreApiUsersFromJson(String jsonData) =>
+      FakestoreapiUsers.fromJsonData(jsonData: jsonDecode(jsonData));
+
+  static Map fakeStoreApiUserstoJson({required FakestoreapiUsers object}) {
+    Map a = {
+      "address": {
+        "geolocation": {"lat": object.lat, "long": object.long},
+        "city": object.city,
+        "street": object.street,
+        "number": object.houseNumber,
+        "zipcode": object.zipcode,
+      },
+      "email": object.email,
+      "username": object.username,
+      "password": object.password,
+      "name": {"firstname": object.firstname, "lastname": object.lastname},
+      "phone": object.phone,
+      "__v": object.v,
+    };
+    return a;
+  }
+
   final String email,
       username,
       password,
@@ -259,7 +304,7 @@ class FakestoreapiUsers {
         lat: geoLoaction['lat'],
         long: geoLoaction['long'],
         houseNumber: address['number'],
-        id: jsonData['id'],
+        id: jsonData['id'] ?? 0,
         v: jsonData['__v']);
   }
 }
@@ -269,15 +314,17 @@ class AnimeDatabase {
   final List alternativeTitles, genres;
   final int ranking, noOfEpisode;
 
-  AnimeDatabase({required this.type, required this.id,
-    required this.title,
-    required this.image,
-    required this.malLink,
-    required this.decription,
-    required this.alternativeTitles,
-    required this.genres,
-    required this.ranking,
-    required this.noOfEpisode});
+  AnimeDatabase(
+      {required this.type,
+      required this.id,
+      required this.title,
+      required this.image,
+      required this.malLink,
+      required this.decription,
+      required this.alternativeTitles,
+      required this.genres,
+      required this.ranking,
+      required this.noOfEpisode});
 
   factory AnimeDatabase.fromJsonData({required Map jsonData}) {
     return AnimeDatabase(

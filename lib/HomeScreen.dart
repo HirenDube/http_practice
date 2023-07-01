@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:http_practice/AnimeWallpapers.dart';
 import 'package:http_practice/AnimeWallpapers2.dart';
 import 'package:http_practice/DisplayAnimeDataBase.dart';
+import 'package:http_practice/FakeStoreApiUsersPost.dart';
 import 'package:http_practice/FakestoreapiUsers.dart';
+import 'package:http_practice/ProductsPost.dart';
 import 'package:http_practice/jsonplaceholder.typicode.com/AlbumsApiData.dart';
 import 'package:http_practice/jsonplaceholder.typicode.com/CommentsApiData.dart';
 import 'package:http_practice/jsonplaceholder.typicode.com/PhotosApiData.dart';
@@ -12,6 +14,7 @@ import 'package:http_practice/jsonplaceholder.typicode.com/ToDosApiData.dart';
 import 'package:http_practice/jsonplaceholder.typicode.com/UsersApiData.dart';
 
 import 'Unsplash Api.dart';
+import 'UserBD Crud Pract using Firebase RealtimeDataBase rest Api/Register.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -26,10 +29,33 @@ class HomeScreen extends StatelessWidget {
       ),
       body: ListView(children: [
         ListTile(
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ProductsPost())),
+          title: Text("Products Post"),
+          subtitle: Text("https://fakestoreapi.com/products"),
+        ),
+        Divider(),
+        ListTile(
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => FakeStoreApiUsersPost())),
+          title: Text("Fake Store API Users Post"),
+          subtitle: Text("https://fakestoreapi.com/users"),
+        ),
+        Divider(),
+        ListTile(
           onTap: () => Navigator.push(context,
               MaterialPageRoute(builder: (context) => ProductsApiData())),
           title: Text("Products"),
           subtitle: Text("https://fakestoreapi.com/products"),
+        ),
+        Divider(),
+        ListTile(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => FakestoreapiUsersDisplayData())),
+          title: Text("Fake Store API Users"),
+          subtitle: Text("https://fakestoreapi.com/users"),
         ),
         Divider(),
         ListTile(
@@ -76,39 +102,42 @@ class HomeScreen extends StatelessWidget {
         Divider(),
         ListTile(
           onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => UnsplashWallpaperGetter())),
+              context,
+              MaterialPageRoute(
+                  builder: (context) => UnsplashWallpaperGetter())),
           title: Text("Unsplash Wallpapers"),
           subtitle: Text("https://api.unsplash.com/search/photos?query=dogs"),
         ),
         Divider(),
         ListTile(
-          onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => FakestoreapiUsersDisplayData())),
-          title: Text("Fake Store API Users"),
-          subtitle: Text("https://fakestoreapi.com/users"),
-        ),
-        Divider(),
-        ListTile(
-          onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => RandomAnimeWallpapers())),
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => RandomAnimeWallpapers())),
           title: Text("Random Anime Wallpapers"),
-          subtitle: Text("https://harrynull.tech/api/wallpapers/random_anime_wallpaper"),
+          subtitle: Text(
+              "https://harrynull.tech/api/wallpapers/random_anime_wallpaper"),
         ),
         Divider(),
         ListTile(
           onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => RandomAnimeWallpapers2())),
+              context,
+              MaterialPageRoute(
+                  builder: (context) => RandomAnimeWallpapers2())),
           title: Text("Random Anime Wallpapers 2"),
           subtitle: Text("https://random-anime-img.p.rapidapi.com/anime"),
         ),
         Divider(),
         ListTile(
-          onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => DisplayAnimeDataBase())),
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => DisplayAnimeDataBase())),
           title: Text("Anime Database"),
           subtitle: Text("https://anime-db.p.rapidapi.com/anime"),
+        ),Divider(),
+        ListTile(
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => RegisterUsingApi())),
+          title: Text("UserBD Crud Practice using Firebase Realtime Database Api"),
+          subtitle: Text("https://fir-a-to-z-default-rtdb.firebaseio.com/users.json"),
         ),
-
       ]),
     );
   }

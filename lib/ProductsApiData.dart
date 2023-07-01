@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http_practice/HTTP%20Services.dart';
-import 'package:http_practice/Model%20Classes.dart';
+
+import 'package:http_practice/main.dart';
+
+import 'Model Classes.dart';
 
 class ProductsApiData extends StatefulWidget {
   const ProductsApiData({Key? key}) : super(key: key);
@@ -10,9 +14,27 @@ class ProductsApiData extends StatefulWidget {
 }
 
 class _ProductsApiDataState extends State<ProductsApiData> {
+  Future<void> showNotification() async {
+    AndroidNotificationDetails androidNotificationDetails =
+    AndroidNotificationDetails(
+        "Api Notifications", "My First Local Notifications",priority: Priority.max,importance: Importance.max);
+    DarwinNotificationDetails darwinNotificationDetails = DarwinNotificationDetails(
+        presentAlert: true);
+    NotificationDetails notificationDetails = NotificationDetails(
+        android: androidNotificationDetails, iOS: darwinNotificationDetails);
+    await flanp.show(1, "Hello There !!",
+        "You Just got your 1st local notification, have fun while enjoying the APIs",
+        notificationDetails);
+    print("notification released");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: showNotification,
+        child: Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: Text("ProductsApiData"),
       ),
